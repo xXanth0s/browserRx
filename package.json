@@ -1,0 +1,40 @@
+{
+  "name": "browserrx",
+  "version": "1.0.0",
+  "description": "A reactive version of the webextension framework",
+  "main": "index.js",
+  "scripts": {
+    "build:prod": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --watch --config webpack.dev.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "chrome",
+    "browser",
+    "webextension",
+    "rxjs"
+  ],
+  "author": "Maximilian Lang",
+  "license": "MIT",
+  "dependencies": {
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.5",
+    "@types/sinon-chrome": "^2.2.6",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "fork-ts-checker-webpack-plugin": "^4.1.2",
+    "jest": "^25.1.0",
+    "rxjs": "^6.5.4",
+    "sinon-chrome": "^3.0.1",
+    "ts-jest": "^25.2.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3",
+    "webextension-polyfill": "^0.6.0",
+    "webextension-polyfill-ts": "^0.12.0",
+    "webpack": "4.41.6",
+    "webpack-cli": "3.3.11",
+    "webpack-merge": "^4.2.2"
+  }
+}
