@@ -1,10 +1,10 @@
-import {browserRxTabs} from './tabs';
+import { browserRxTabs } from './tabs';
 import * as SinonChrome from 'sinon-chrome';
-import {OnUpdatedEvent} from './events/tabs-update.event';
-import {OnCreatedEvent} from './events/taps-created.event';
-import {OnActivatedEvent} from './events/taps-activated.event';
-import {OnRemovedEvent} from './events/taps-removed.event';
-import Tab = chrome.tabs.Tab;
+import { OnUpdatedEvent } from './events/tabs-update.event';
+import { OnCreatedEvent } from './events/taps-created.event';
+import { OnActivatedEvent } from './events/taps-activated.event';
+import { OnRemovedEvent } from './events/taps-removed.event';
+import { Tabs } from 'webextension-polyfill-ts';
 
 describe('browserRxTabs', () => {
 
@@ -39,7 +39,7 @@ describe('browserRxTabs', () => {
                 tab: {
                     active: false,
                     id: 42
-                } as Tab,
+                } as Tabs.Tab,
                 changeInfo: {
                     discarded: true
                 },
@@ -88,7 +88,7 @@ describe('browserRxTabs', () => {
                 tab: {
                     active: false,
                     id: 42
-                } as Tab,
+                } as Tabs.Tab,
             };
 
             browserRxTabs.onCreated.subscribe(data => {

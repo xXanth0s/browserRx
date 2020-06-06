@@ -1,15 +1,15 @@
-import Tab = chrome.tabs.Tab;
-import {BaseEventTarget} from '../../utils/event-target.abstract';
+import { BaseEventTarget } from '../../utils/event-target.abstract';
+import { browser, Tabs } from 'webextension-polyfill-ts';
 
 export interface OnCreatedEvent {
-    tab: Tab;
+    tab: Tabs.Tab;
 }
 
 export class TabsOnCreated extends BaseEventTarget<OnCreatedEvent> {
 
-    readonly event = chrome.tabs.onCreated;
+    readonly event = browser.tabs.onCreated;
 
-    protected transform(tab: Tab): OnCreatedEvent {
+    protected transform(tab: Tabs.Tab): OnCreatedEvent {
         return {
             tab
         }

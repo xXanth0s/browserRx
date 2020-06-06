@@ -1,15 +1,15 @@
-import TabActiveInfo = chrome.tabs.TabActiveInfo;
-import {BaseEventTarget} from '../../utils/event-target.abstract';
+import { BaseEventTarget } from '../../utils/event-target.abstract';
+import { browser, Tabs } from 'webextension-polyfill-ts';
 
 export type OnActivatedEvent = {
-    activeInfo: TabActiveInfo
+    activeInfo: Tabs.OnActivatedActiveInfoType
 }
 
 export class TabsOnActivated extends BaseEventTarget<OnActivatedEvent> {
 
-    readonly event = chrome.tabs.onActivated;
+    readonly event = browser.tabs.onActivated;
 
-    protected transform(activeInfo: TabActiveInfo): OnActivatedEvent {
+    protected transform(activeInfo: Tabs.OnActivatedActiveInfoType): OnActivatedEvent {
         return {
             activeInfo
         }

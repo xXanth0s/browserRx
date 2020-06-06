@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true,
     "experimentalDecorators": true,
@@ -26,7 +27,6 @@
   "include": [
     "src/**/*"
   ],
-
   "typeRoots": [
     "./node_modules/@types",
      "./types"

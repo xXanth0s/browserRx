@@ -1,19 +1,17 @@
-// import {BaseEventTarget} from '../../utils/event-target.abstract';
-import TabChangeInfo = chrome.tabs.TabChangeInfo;
-import Tab = chrome.tabs.Tab;
-import {BaseEventTarget} from '../../utils/event-target.abstract';
+import { BaseEventTarget } from '../../utils/event-target.abstract';
+import { browser, Tabs } from 'webextension-polyfill-ts';
 
 export interface OnUpdatedEvent {
     tabId: number;
-    changeInfo: TabChangeInfo;
-    tab: Tab;
+    changeInfo: Tabs.OnUpdatedChangeInfoType;
+    tab: Tabs.Tab;
 }
 
 export class TabsOnUpdated extends BaseEventTarget<OnUpdatedEvent> {
 
-    readonly event = chrome.tabs.onUpdated;
+    readonly event = browser.tabs.onUpdated;
 
-    protected transform(tabId: number, changeInfo: TabChangeInfo, tab: Tab): OnUpdatedEvent {
+    protected transform(tabId: number, changeInfo: Tabs.OnUpdatedChangeInfoType, tab: Tabs.Tab): OnUpdatedEvent {
         return {
             tabId,
             changeInfo,
