@@ -1,0 +1,19 @@
+{
+  "name": "@browserrx/tab-monitor-example",
+  "version": "1.0.0",
+  "description": "Example extension demonstrating browserRx.tabs functionality",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "dependencies": {
+    "browserrx": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "typescript": "^5.0.0",
+    "@types/chrome": "^0.0.260",
+    "@types/webextension-polyfill": "^0.12.1",
+    "webextension-polyfill": "^0.10.0"
+  }
+} 

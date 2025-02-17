@@ -1,4 +1,4 @@
-import { Tabs } from 'webextension-polyfill';
+import type { Tabs } from 'webextension-polyfill';
 
 export interface OnUpdatedEvent {
     tabId: number;

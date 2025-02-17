@@ -1,0 +1,66 @@
+{
+  "name": "browserRx",
+  "description": "RxJS wrapper for WebExtensions API events - Making browser extension events reactive",
+  "lsp": {
+    "typescript": {
+      "enabled": true,
+      "diagnostics": true,
+      "completions": true,
+      "codeActions": true,
+      "format": true
+    }
+  },
+  "formatOnSave": true,
+  "search": {
+    "exclude": [
+      "dist/**",
+      "node_modules/**",
+      "coverage/**",
+      ".git/**"
+    ]
+  },
+  "test": {
+    "runner": "jest",
+    "testMatch": ["**/*.spec.ts"],
+    "env": {
+      "jest": true,
+      "jsdom": true
+    }
+  },
+  "folders": {
+    "src/lib": {
+      "name": "Library Source",
+      "description": "Core library implementation with namespace-specific modules"
+    },
+    "src/lib/utils": {
+      "name": "Utilities",
+      "description": "Core utilities including fromBrowserEvent for event transformation"
+    },
+    "src/examples": {
+      "name": "Example Extensions",
+      "description": "Example WebExtension implementations using the library. Each example is a complete extension that can be loaded into a browser."
+    }
+  },
+  "tasks": {
+    "build": {
+      "command": "npm run build",
+      "group": "build"
+    },
+    "test": {
+      "command": "npm run test",
+      "group": "test"
+    },
+    "test:coverage": {
+      "command": "npm run test:coverage",
+      "group": "test"
+    },
+    "lint": {
+      "command": "npm run lint",
+      "group": "lint"
+    },
+    "lint:fix": {
+      "command": "npm run lint:fix",
+      "group": "lint"
+    }
+  }
+} 

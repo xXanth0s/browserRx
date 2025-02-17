@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "BrowserRx Tab Monitor",
+  "version": "1.0",
+  "description": "A simple extension demonstrating browserRx.tabs functionality",
+  "permissions": ["tabs"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.ts",
+    "type": "module"
+  }
+} 
