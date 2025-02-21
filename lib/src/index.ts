@@ -1,6 +1,8 @@
 import {browserRxTabs} from './tabs/tabs';
 
-export const browserRx = {
+export * from './tabs';
 
+// Export main browserRx object
+export const browserRx = {
     tabs: browserRxTabs
 };

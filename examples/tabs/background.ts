@@ -1,7 +1,4 @@
-import { browserRx } from 'browserrx';
-import { OnActivatedEvent, OnRemovedEvent } from 'browserrx/dist/tabs/tabs-models';
-import { OnUpdatedEvent } from 'browserrx/dist/tabs/tabs-models';
-import { OnCreatedEvent } from 'browserrx/dist/tabs/tabs-models';
+import { browserRx, OnActivatedEvent, OnRemovedEvent, OnUpdatedEvent, OnCreatedEvent } from 'browserrx';
 
 /* global console */
 
