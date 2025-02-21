@@ -8,6 +8,7 @@ import {
 import Browser from 'webextension-polyfill';
 import { fromBrowserEvent } from '../utils/from-browser-event';
 
+
 export const browserRxTabs = {
     get onUpdated(): Observable<OnUpdatedEvent> {
         return fromBrowserEvent<typeof Browser.tabs.onUpdated, OnUpdatedEvent>(
