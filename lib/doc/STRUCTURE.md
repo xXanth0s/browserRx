@@ -56,37 +56,98 @@ Each browser API namespace (e.g., tabs, browserAction) follows the same structur
 
 ## Testing Strategy
 
-### Mock Structure
+### Test Configuration
 
-1. **Feature-specific Mocks**
-   - Located in `__mocks__` folder within feature directories
-   - Contains only mocks relevant to that feature
-   - Exports mocked events and methods
+The project uses Vitest with the following configuration (`vitest.config.ts`):
+```typescript
+{
+  test: {
+    environment: 'jsdom',
+    include: ['**/*.spec.ts'],
+    globals: true,
+    testTimeout: 1000,
+    hookTimeout: 1000,
+    alias: {
+      'webextension-polyfill': resolve(__dirname, 'src/__mocks__/webextension-polyfill.ts')
+    }
+  }
+}
+```
 
-2. **Main Mock Aggregator**
-   - Located at `src/__mocks__/webextension-polyfill.ts`
-   - Imports and combines all feature-specific mocks
-   - Provides a complete mock of the WebExtension API
+Key configuration points:
+- Uses JSDOM environment for browser API simulation
+- Automatically aliases `webextension-polyfill` imports to our mock implementation
+- Global test setup with reasonable timeouts
 
-### Test Patterns
+### Test Structure
 
 Each feature's tests follow these patterns:
 
 1. **Basic Event Emission**
-   - Tests that events are properly emitted
-   - Verifies event payload structure
+   ```typescript
+   it('should emit when event occurs', () => {
+     const mockFn = vi.fn();
+     const testEvent = { /* event data */ };
+     
+     browserRxFeature.onEvent.subscribe(mockFn);
+     
+     const [eventSubject] = WebExtensionMock.feature.onEvent.addListener.mock.calls[0];
+     eventSubject(/* event args */);
+     
+     expect(mockFn).toHaveBeenCalledWith(testEvent);
+   });
+   ```
 
 2. **Unsubscription**
-   - Tests cleanup on unsubscribe
-   - Verifies removeListener is called
+   ```typescript
+   it('should complete when unsubscribed', () => {
+     const subscription = browserRxFeature.onEvent.subscribe();
+     subscription.unsubscribe();
+     expect(WebExtensionMock.feature.onEvent.removeListener).toHaveBeenCalled();
+   });
+   ```
 
-3. **Event Filtering**
-   - Tests RxJS operators like `filter`
-   - Verifies filtered events behave correctly
+3. **RxJS Operator Tests**
+   - Tests `filter` operator with event-specific conditions
+   - Tests `take(1)` for single event consumption
+   - Tests `takeUntil` for external completion
 
-4. **RxJS Integration**
-   - Tests integration with RxJS operators (`take`, `takeUntil`)
-   - Verifies proper completion behavior
+4. **Event Filtering**
+   ```typescript
+   it('should emit filtered events', () => {
+     browserRxFeature.onEvent.pipe(
+       filter(event => /* condition */)
+     ).subscribe(mockFn);
+     
+     // Test non-matching event
+     eventSubject(nonMatchingEvent);
+     expect(mockFn).not.toHaveBeenCalled();
+     
+     // Test matching event
+     eventSubject(matchingEvent);
+     expect(mockFn).toHaveBeenCalled();
+   });
+   ```
+
+### Mock Structure
+
+1. **Feature-specific Mocks**
+   ```typescript
+   export const mockEvent = {
+     addListener: vi.fn(),
+     removeListener: vi.fn(),
+     hasListener: vi.fn()
+   };
+   
+   export const feature = {
+     onEvent: mockEvent
+   };
+   ```
+
+2. **Main Mock Aggregator**
+   - Located at `src/__mocks__/webextension-polyfill.ts`
+   - Imports and combines all feature-specific mocks
+   - Automatically used via Vitest alias configuration
 
 ## Adding New Features
 
@@ -96,4 +157,5 @@ To add support for a new browser API namespace:
 2. Create the required files following the module structure
 3. Create namespace-specific mocks in a `__mocks__` subdirectory
 4. Add the mocks to the main mock aggregator
-5. Export the new functionality from the main entry point 
+5. Export the new functionality from the main entry point
+6. Add comprehensive tests following the established patterns 
